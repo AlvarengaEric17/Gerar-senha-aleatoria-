@@ -1,4 +1,6 @@
-import { StyleSheet, Text, View, Image, TouchableOpacity } from 'react-native';
+import { StyleSheet, Text, View, Image, TouchableOpacity, Modal } from 'react-native';
+
+import { ModalPassword } from "./src/components/modal/index"
 
 import "@fontsource/poppins";
 
@@ -9,6 +11,7 @@ let charset = "abcdefghijklmnopqrstuvwxyz!#$&@%0123456789ABCDEFGHIJKLMNOPQRSTUVW
 export default function App() {
 
   const [senhaGerada, setSenhaGerada] = useState("")
+  const [modalVisible, setModalVisible] = useState(false)
 
   function gerarSenha() {
     let senha = ""
@@ -19,9 +22,10 @@ export default function App() {
 
     }
     setSenhaGerada(senha)
+    setModalVisible(true)
   }
 
- 
+
 
   return (
     <View style={styles.container}>
@@ -37,7 +41,14 @@ export default function App() {
       <TouchableOpacity style={styles.button} onPress={gerarSenha} >
         <Text style={styles.textButton}>Gerar Senha</Text>
       </TouchableOpacity>
-      <Text style={styles.textSenha}>Senha: {senhaGerada}</Text>
+
+      <Modal visible={modalVisible} animationType='fade' transparent={true}>
+        <ModalPassword />
+      </Modal>
+
+
+
+
 
     </View>
   );
@@ -53,29 +64,29 @@ const styles = StyleSheet.create({
     fontFamily: "Poppins",
   },
   logo: {
-  marginBottom: 20,
-},
+    marginBottom: 20,
+  },
   title: {
-  fontWeight: "bold",
-  fontSize: 28,
-  marginBottom: 20,
-},
+    fontWeight: "bold",
+    fontSize: 28,
+    marginBottom: 20,
+  },
   button: {
-  backgroundColor: "#333",
-  borderRadius: 8,
-  width: "70%",
-  height: 50,
-  alignItems: "center",
-  justifyContent: "center",
-  marginBottom: 20
+    backgroundColor: "#333",
+    borderRadius: 8,
+    width: "70%",
+    height: 50,
+    alignItems: "center",
+    justifyContent: "center",
+    marginBottom: 20
 
-}, textButton: {
-  color: "#fff",
-  fontWeight: "bold",
-  fontSize: 18,
-},
+  }, textButton: {
+    color: "#fff",
+    fontWeight: "bold",
+    fontSize: 18,
+  },
   textSenha: {
-  fontSize: 18,
-  fontWeight: "bold",
-}
+    fontSize: 18,
+    fontWeight: "bold",
+  }
 });
